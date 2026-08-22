@@ -1,3 +1,4 @@
-# 注意：mcp 必须锁定 1.x（2.x 移除了 mcp.server.fastmcp，不兼容）
-mcp>=1.0.0,<2.0.0
-httpx>=0.27
+# Runtime dependencies verified with Python 3.12 on 2026-08-22.
+# mcp 2.x is incompatible with mcp.server.fastmcp used by this project.
+mcp==1.29.0
+httpx==0.28.1
