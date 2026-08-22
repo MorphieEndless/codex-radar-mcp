@@ -55,7 +55,7 @@ venv/bin/pip install -r requirements.txt
 
 ```bash
 ./healthcheck.sh http://127.0.0.1:8765/mcp
-# 期望输出：serverInfo":{"name":"codex-radar",...}
+# 期望输出：✅ healthy: codex-radar 1.29.0
 ```
 
 ### 4. 接入 MCP 客户端
@@ -91,6 +91,7 @@ venv/bin/pip install -r requirements.txt
 | `CODEX_RADAR_PORT` | `8765` | 监听端口 |
 | `CODEX_RADAR_TIMEOUT` | `15` | 抓取远端超时（秒） |
 | `CODEX_RADAR_CACHE_TTL` | `120` | 本地缓存时间（秒） |
+| `CODEX_RADAR_PROGRESS_ENABLED` | `false` | 是否发送 MCP progress notification；默认关闭，且不保证 MaiBot 将其渲染为群消息 |
 
 ---
 
@@ -158,6 +159,18 @@ venv/bin/pip install -r requirements.txt
 
 2. 在群里对麦麦发 `/mcp reconnect`（或重启 MaiBot 容器）
 3. 发 `/mcp tools` 确认 5 个工具已列出
+
+### 6. 测试
+
+安装开发依赖并运行单元测试：
+
+```bash
+python3 -m venv venv
+venv/bin/pip install -r requirements-dev.txt
+venv/bin/pytest -q
+```
+
+测试覆盖模型过滤、缓存命中、并发 single-flight、上游失败重试和字段缺失时的输出。
 
 ---
 
