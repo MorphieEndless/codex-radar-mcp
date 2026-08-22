@@ -1,0 +1,3 @@
+# 注意：mcp 必须锁定 1.x（2.x 移除了 mcp.server.fastmcp，不兼容）
+mcp>=1.0.0,<2.0.0
+httpx>=0.27
