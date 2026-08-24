@@ -58,6 +58,27 @@ async def test_tool_output_handles_missing_total():
 
 
 @pytest.mark.asyncio
+async def test_intel_effort_passes_through_new_source_fields():
+    point = {
+        "model": "k3", "effort": "max", "iq": 114.47, "passed": 29, "total": 38,
+        "average_price_usd": 3.772089, "average_price_usd_by_band": None,
+        "average_minutes": 44.88, "average_total_tokens": 6472791,
+        "cache_hit_rate": 0.9844, "combined_cost_index": 36927.349,
+        "average_agent_steps": 40.68, "agent_steps_samples": 38,
+        "token_samples": 38, "cache_token_samples": 30,
+        "runs_24h": 3, "runs_48h": 3, "runs_total": 38,
+    }
+    with patch.object(radar, "_get", new=AsyncMock(return_value=({"points": [point]}, "now"))):
+        result = await radar.tool_intel_effort("k3")
+    assert result["points"][0]["combined_cost_index"] == 36927.349
+    assert result["points"][0]["average_agent_steps"] == 40.68
+    assert result["points"][0]["runs_24h"] == 3
+    assert result["points"][0]["runs_48h"] == 3
+    assert result["points"][0]["agent_steps_samples"] == 38
+    assert result["points"][0]["average_price_usd_by_band"] is None
+
+
+@pytest.mark.asyncio
 async def test_concurrent_cache_miss_is_single_flight():
     response = httpx.Response(200, json={"value": 1}, request=httpx.Request("GET", "https://example.test/data"))
     client = AsyncMock()

@@ -101,8 +101,8 @@ venv/bin/pip install -r requirements.txt
 |---|---|---|
 | `get_model_ratings` | 无 | 近 24h 社区体感评分（按模型分组） |
 | `get_radar_insights` | 无 | **★核心**：综合 IQ + 4 场景档位推荐 |
-| `get_intelligence_effort` | `model?` | 软件工程 IQ 明细（可过滤，如 `gpt-5.6-sol`） |
-| `get_visual_spatial` | `model?` | 视觉空间 IQ（庞贝邻接 F1，可过滤） |
+| `get_intelligence_effort` | `model?` | 软件工程 IQ 明细（含成本指数/agent 步数/24-48h 运行量，可过滤如 `gpt-5.6-sol` / `k3`） |
+| `get_visual_spatial` | `model?` | 视觉空间 IQ（庞贝邻接 F1，含成本指数/agent 步数/运行量，可过滤） |
 | `get_subscriber_count` | 无 | 雷达订阅人数 |
 
 ---
